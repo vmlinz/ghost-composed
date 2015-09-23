@@ -1,0 +1,21 @@
+ghost:
+  image: ghost
+  ports:
+    - "8090:2368"
+  environment:
+    - NODE_ENV=production
+  volumes_from:
+    - ghost-data
+  links:
+    - mysql
+mysql:
+  image: mariadb
+  environment:
+    - MYSQL_ROOT_PASSWORD=^IEoOfTLKimAfsd$
+  volumes_from:
+    - ghost-data
+ghost-data:
+  build: ./ghost-data
+  volumes: 
+    - /var/lib/ghost
+    - /var/lib/mysql
